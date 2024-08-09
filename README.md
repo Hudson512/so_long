@@ -29,7 +29,7 @@
 			mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 			mlx_loop(mlx);
 		}
-
+<p>
 		mlx_new_window(): 
 			Função usada para criar uma nova janela na tela após a inicialização da MiniLibX com a função mlx_init.
 
@@ -65,4 +65,5 @@
 			Retorno
 				int:
 					Em muitos casos, essa função nunca retorna, porque ela mantém o programa em execução contínua. Se ela retornar, normalmente será um valor inteiro, que pode indicar um erro ou que o loop foi terminado manualmente.
+</p>
 </ol>
