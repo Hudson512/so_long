@@ -3,7 +3,7 @@
 
 <h1>Guia de uso da minilibx</h1>
 <ol>
-<li>1. Inicializar a bliblioteca:</li>
+<li>Inicializar a bliblioteca:</li>
 
 		#include <mlx.h>
 
@@ -16,7 +16,7 @@
 
 		mlx_init() : Função que estabelecerá uma conexão com sistema gráfico correto e retornará um void * que contém a localização da nossa instância MLX atual
 	
-<li>2. Criando um janela:</li>
+<li>Criando um janela:</li>
 
 		#include <mlx.h>
 
