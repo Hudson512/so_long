@@ -2,23 +2,23 @@
 [Documentação da biblioteca minilibx](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)
 
 <h1>Guia de uso da minilibx</h1>
+<ol>
+<li>1. Inicializar a bliblioteca:</li>
 
-	1. Inicializar a bliblioteca:
-
-		```#include <mlx.h>
+		#include <mlx.h>
 
 		int	main(void)
 		{
 			void	*mlx;
 
 			mlx = mlx_init();
-		}```
+		}
 
 		mlx_init() : Função que estabelecerá uma conexão com sistema gráfico correto e retornará um void * que contém a localização da nossa instância MLX atual
 	
-	2. Criando uma janela:
+<li>2. Criando um janela:</li>
 
-		```#include <mlx.h>
+		#include <mlx.h>
 
 		int	main(void)
 		{
@@ -28,7 +28,7 @@
 			mlx = mlx_init();
 			mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 			mlx_loop(mlx);
-		}```
+		}
 
 		mlx_new_window(): 
 			Função usada para criar uma nova janela na tela após a inicialização da MiniLibX com a função mlx_init.
@@ -65,3 +65,4 @@
 			Retorno
 				int:
 					Em muitos casos, essa função nunca retorna, porque ela mantém o programa em execução contínua. Se ela retornar, normalmente será um valor inteiro, que pode indicar um erro ou que o loop foi terminado manualmente.
+</ol>
