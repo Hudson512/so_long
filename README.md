@@ -13,8 +13,9 @@
 
 			mlx = mlx_init();
 		}
-
-		mlx_init() : Função que estabelecerá uma conexão com sistema gráfico correto e retornará um void * que contém a localização da nossa instância MLX atual
+<p>
+mlx_init() : Função que estabelecerá uma conexão com sistema gráfico correto e retornará um void * que contém a localização da nossa instância MLX atual
+</p>
 	
 <li>Criando um janela:</li>
 
