@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/07 17:05:27 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/12 17:12:17 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME = so_long
 CC = cc
 #FLAGS = -Wall -Wextra -Werror
 
+Libft_DIR = ./libft
+Libft_A = $(Libft_DIR)/libft.a
 Libix_DIR = ./mlx_linux
 Libix_A = $(Libix_DIR)/libmlx.a
 
@@ -25,11 +27,14 @@ RM = rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ_SRC) $(Libix_A)
-	$(CC) $(FLAGS) $(OBJ_SRC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJ_SRC) $(Libix_A) $(Libft_A)
+	$(CC) $(FLAGS) $(OBJ_SRC) $(Libft_A) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(Libix_A):
 	$(MAKE) -C $(Libix_DIR)
+
+$(Libft_A):
+	$(MAKE) -C $(Libft_DIR)
 
 %.o: %.c
 	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
@@ -37,10 +42,11 @@ $(Libix_A):
 clean:
 	$(RM) $(OBJ_SRC)
 	$(MAKE) clean -C $(Libix_DIR)
+	$(MAKE) clean -C $(Libix_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) fclean -C $(Libix_DIR)
+	$(MAKE) fclean -C $(Libft_DIR)
 
 re: fclean all
 
