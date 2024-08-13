@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/13 12:46:05 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/13 16:00:51 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,19 @@ Libix_A = $(Libix_DIR)/libmlx.a
 SRCS_DIR = ./src
 
 SRCS =	main.c \
-		$(SRCS_DIR)/checkers.c
+		$(SRCS_DIR)/checkers.c\
+		$(SRCS_DIR)/get_next_line/get_next_line.c\
+		$(SRCS_DIR)/get_next_line/get_next_line_utils.c
 
 
 OBJ_SRC = $(SRCS:.c=.o)
-
+OBJ_GET_NEXT_LINE = $(GET_NEXT_LINE:.c=.o)
 RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJ_SRC) $(Libix_A) $(Libft_A)
-	$(CC) $(FLAGS) $(OBJ_SRC) $(Libft_A) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ_SRC) $(Libft_A) $(OBJ_GET_NEXT_LINE) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(Libix_A):
 	$(MAKE) -C $(Libix_DIR)
