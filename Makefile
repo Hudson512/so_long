@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/12 17:12:17 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/13 12:46:05 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,11 @@ Libft_DIR = ./libft
 Libft_A = $(Libft_DIR)/libft.a
 Libix_DIR = ./mlx_linux
 Libix_A = $(Libix_DIR)/libmlx.a
+SRCS_DIR = ./src
 
-SRCS = main.c
+SRCS =	main.c \
+		$(SRCS_DIR)/checkers.c
+
 
 OBJ_SRC = $(SRCS:.c=.o)
 

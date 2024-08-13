@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/13 12:55:01 by hmateque         ###   ########.fr       */
+/*   Created: 2024/08/13 12:31:47 by hmateque          #+#    #+#             */
+/*   Updated: 2024/08/13 12:54:56 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../so_long.h"
 
-# include "mlx_linux/mlx.h"
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <string.h>
+int	ft_check_extesion(const char *str, const char *suffix)
+{
+	size_t str_len;
+	size_t suffix_len;
 
-int	ft_check_extesion(const char *str, const char *suffix);
+	str_len = ft_strlen(str);
+	suffix_len = ft_strlen(suffix);
 
-#endif
+	if (suffix_len > str_len)
+		return (0);
+	return (ft_strncmp(str + str_len - suffix_len, suffix, suffix_len) == 0);
+}
