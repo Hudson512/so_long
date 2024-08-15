@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:47:53 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/14 13:33:26 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:58:59 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ int	main(int ac, char **av)
 	{
 		if(ft_check_file_extesion(av[1], ".ber"))
 		{
-
-			if ((file->fd = open(av[1], O_RDONLY)) == -1)
-				print_file_error();
-			if (ft_check_file_dimensions(&file) == 0)
+			ft_map_innit(&file);
+			file->fd = open(av[1], O_RDONLY);
+			if (ft_check_fd(file->fd) && get_map_arr(av[1], &file, ft_check_file_dimensions(&file)))
 			{
 				mlx->mlx = mlx_init();
 				mlx->mlx_win = mlx_new_window(mlx->mlx, 900, 800, "Hello world!");
@@ -39,10 +38,12 @@ int	main(int ac, char **av)
 				mlx_loop(mlx->mlx);
 			}
 			else
-				exit(1);
+				printf("Error: NNNN\n");
 		}
 		else
 			printf("Error: <file_name>.ber\n");
 	}
+	free(file);
+	free(mlx);
 	return (0);
 }

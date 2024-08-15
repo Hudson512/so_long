@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/14 13:00:11 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:47:56 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ typedef struct s_file
 	int	rows;
 	int	cols;
 	int	fd;
+	int	character;
+	int	exit;
+	int	collectibles;
+	char	**arr;
+	int	bytesRead;
 }	t_info_file;
 
 typedef struct s_mlx
@@ -40,7 +45,12 @@ typedef struct s_mlx
 
 int		ft_check_file_extesion(const char *str, const char *suffix);
 int 	ft_check_file_dimensions(t_info_file **file);
+int		get_map_arr(char *file_path, t_info_file **file, int state);
+int		print_map_error(char *str, t_info_file **file);
+int		ft_check_fd(int fd);
+void	check_caracter_file(t_info_file **file, char c);
+void	ft_map_innit(t_info_file **file);
 void	print_file_error(void);
-void	print_map_error(void);
+void	print_array_map(char **arr);
 
 #endif

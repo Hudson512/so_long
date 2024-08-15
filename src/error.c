@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:32:44 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/14 13:37:32 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/15 08:46:24 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	print_file_error(void)
 {
-	perror("Erro ao abrir o arquivo");
-	exit(1);
+	perror("Error opening the file");
 }
 
-void	print_map_error(void)
+int		print_map_error(char *str, t_info_file **file)
 {
+	t_info_file *temp;
+
+	temp = *file;
+	if (str != NULL)
+		free(str);
+	close(temp->fd);
 	write(2, "Error\n", 6);
 	write(2, "Check the map\n", 14);
+	return (0);
 }
