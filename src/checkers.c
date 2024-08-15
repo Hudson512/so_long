@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:31:47 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/13 16:26:58 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:28:50 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,19 @@ int ft_check_file_dimensions(t_info_file **file)
     t_info_file *temp = *file;
     temp->rows = 0;
     temp->cols = 0;
-    //printf("Antes do while: %s\n", get_next_line(file.fd));
     while ((line = get_next_line(temp->fd)) != NULL)
     {
         temp_cols = 0;
-        printf("%s", line);
-        while (line[temp_cols] != '\0' && line[temp_cols] != '\n')
+        //printf("%s", line);
+        while (line[temp_cols] != '\0' && line[temp_cols] != '\n' && 
+            (line[temp_cols] == '1' || line[temp_cols] == '0' || 
+                line[temp_cols] == 'P' || line[temp_cols] == 'C' || line[temp_cols] == 'E'))
             temp_cols++;
         if (temp->rows == 0)
             temp->cols = temp_cols;
         else if (temp_cols != temp->cols)
         {
-            fprintf(stderr, "Erro: Linhas com números de colunas diferentes encontradas.\n");
+            print_map_error();
             free(line);
             close(temp->fd);
             return -1;
@@ -52,6 +53,12 @@ int ft_check_file_dimensions(t_info_file **file)
         temp->rows++;
         free(line);
     }
+    if (temp->rows > temp->cols || temp->rows < temp->cols)
+    {
+        close(temp->fd);
+        return 0;
+    }
+    print_map_error();
     close(temp->fd);
-    return 0;
+    return -1;
 }

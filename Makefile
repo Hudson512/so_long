@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/13 16:00:51 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/14 13:00:40 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_DIR = ./src
 
 SRCS =	main.c \
 		$(SRCS_DIR)/checkers.c\
+		$(SRCS_DIR)/error.c\
 		$(SRCS_DIR)/get_next_line/get_next_line.c\
 		$(SRCS_DIR)/get_next_line/get_next_line_utils.c
 
