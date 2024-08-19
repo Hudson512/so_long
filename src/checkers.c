@@ -6,20 +6,20 @@
 /*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:31:47 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/15 10:24:21 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/19 08:49:31 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int ft_check_fd(int fd)
+int	ft_check_fd(int fd)
 {
-    if (fd == -1)
-    {
-        print_file_error();
-        return (0);
-    }
-    return (1);
+	if (fd == -1)
+	{
+		print_file_error();
+		return (0);
+	}
+	return (1);
 }
 
 int	ft_check_file_extesion(const char *str, const char *suffix)
@@ -49,35 +49,54 @@ void	check_caracter_file(t_info_file **file, char c)
 
 int	ft_check_file_dimensions(t_info_file **file)
 {
-	char		*line;
 	int			temp_cols;
 	t_info_file	*temp;
 
 	temp = *file;
-	while ((line = get_next_line(temp->fd)) != NULL)
+	while ((temp->read_line = get_next_line(temp->fd)) != NULL)
 	{
 		temp_cols = 0;
-		while (line[temp_cols] != '\0' && line[temp_cols] != '\n'
-			&& (line[temp_cols] == '1' || line[temp_cols] == '0'
-				|| line[temp_cols] == 'P' || line[temp_cols] == 'C'
-				|| line[temp_cols] == 'E'))
-		{
-			check_caracter_file(file, line[temp_cols]);
-			temp_cols++;
-		}
-        temp_cols++;
+		while (is_valid_char(temp->read_line[temp_cols]))
+			check_caracter_file(file, temp->read_line[temp_cols++]);
+		temp_cols++;
 		if (temp->rows == 0)
 			temp->cols = temp_cols;
 		else if (temp_cols != temp->cols)
-			return (print_map_error(line, file) == 1);
+			return (print_map_error(temp->read_line, file) == 1);
 		temp->rows++;
-		free(line);
+		free(temp->read_line);
 	}
-	if (temp->rows > temp->cols || temp->rows < temp->cols
-		&& (temp->character == 1 && temp->exit == 1 && temp->collectibles > 0))
-	{
-		close(temp->fd);
+	if (is_square(file) && (close(temp->fd) == 0))
 		return (1);
-	}
-	return (print_map_error(line, file) == 1);
+	return ((print_map_error(temp->read_line, file)) == 1);
+}
+int	is_valid_char(char c)
+{
+	if ((c != '\0' && c != '\n') && (c == '1' || c == '0' || c == 'P'
+			|| c == 'C' || c == 'E'))
+		return (1);
+	else
+		return (0);
+}
+int	is_square(t_info_file **file)
+{
+	t_info_file	*temp;
+
+	temp = *file;
+	printf("r = %d, c = %d\n", temp->rows, (temp->cols - 1));
+	if (temp->rows > (temp->cols - 1) || temp->rows < (temp->cols - 1))
+		return (valid_characters(file));
+	else
+		return (0);
+}
+
+int	valid_characters(t_info_file **file)
+{
+	t_info_file *temp;
+
+	temp = *file;
+	if (temp->character == 1 && temp->exit == 1 && temp->collectibles > 0)
+		return (1);
+	else
+		return (0);
 }

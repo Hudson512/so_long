@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/19 04:35:46 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/19 08:44:55 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void	ft_map_innit(t_info_file **file)
 	temp->bytesRead = 0;
 	temp->arr = NULL;
 	temp->arr_backup = NULL;
+	temp->read_line = NULL;
 }
 
 void	print_file_map(t_info_file **file)
 {
-	t_info_file *temp;
-	
+	t_info_file	*temp;
+
 	temp = *file;
 	printf("##### Dados do ficheiro #####\n");
 	printf("FD: %d\n", temp->fd);
@@ -49,7 +50,6 @@ void	print_file_map(t_info_file **file)
 int	get_map_arr(char *file_path, t_info_file **file, int state)
 {
 	t_info_file	*temp;
-	char		*buffer;
 	int			len;
 	int			check_fill;
 
@@ -59,33 +59,24 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 		return (0);
 	if (ft_check_fd(temp->fd = open(file_path, O_RDONLY)) == 0)
 		return (0);
-	if ((buffer = (char *)ft_calloc((len + 1), sizeof(char))) == NULL)
-		return (0);
-	if ((temp->bytesRead = read(temp->fd, buffer, len)) == -1)
-	{
-		free(buffer);
-		return (0);
-	}
-	if ((temp->arr = ft_split(buffer, 10)) == NULL)
-	{
-		free(buffer);
-		return (0);
-	}
-	if ((temp->arr_backup = ft_split(buffer, 10)) == NULL)
-	{
-		free(buffer);
-		free(temp->arr);
-		return (0);
-	}
-	free(buffer);
-	check_fill = check_flood_fill(temp->arr,((t_point){temp->rows, temp->cols}), get_char_position('P', temp->arr));
-	close(temp->fd);
-	return (check_border_array(temp->arr_backup, temp->rows, temp->cols) && check_fill);
+	if ((temp->read_line = (char *)ft_calloc((len + 1), sizeof(char))) == NULL)
+		return ((print_map_error(temp->read_line, file)) == 1);
+	if ((temp->bytesRead = read(temp->fd, temp->read_line, len)) == -1)
+		return ((print_map_error(temp->read_line, file)) == 1);
+	if ((temp->arr = ft_split(temp->read_line, 10)) == NULL)
+		return ((print_map_error(temp->read_line, file)) == 1);
+	if ((temp->arr_backup = ft_split(temp->read_line, 10)) == NULL)
+		return ((print_map_error(temp->read_line, file)) == 1);
+	check_fill = check_flood_fill(temp->arr, ((t_point){temp->rows,
+				temp->cols}), get_char_position('P', temp->arr));
+	free(temp->read_line);
+	return (check_border_array(temp->arr_backup, temp->rows, temp->cols)
+		&& check_fill && (close(temp->fd) == 0));
 }
 
 t_point	get_char_position(char ch, char **map)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = -1;
@@ -103,7 +94,7 @@ t_point	get_char_position(char ch, char **map)
 
 void	print_array_map(char **arr)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!arr)
@@ -115,27 +106,26 @@ void	print_array_map(char **arr)
 	}
 }
 
-int check_border_array(char **arr, int rows, int cols)
+int	check_border_array(char **arr, int rows, int cols)
 {
-   int  i;
-   int  j;
-   
-   i = 0;
-   j = 0;
-   while (j < (cols - 1))
-   {
-        if (arr[0][j] != '1' || arr[rows - 1][j] != '1')
-            return (0);
-        j++;
-    }
+	int	i;
+	int	j;
 
-    while (i < rows)
-    {
-        if (arr[i][0] != '1' || arr[i][cols - 2] != '1')
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	j = 0;
+	while (j < (cols - 1))
+	{
+		if (arr[0][j] != '1' || arr[rows - 1][j] != '1')
+			return (0);
+		j++;
+	}
+	while (i < rows)
+	{
+		if (arr[i][0] != '1' || arr[i][cols - 2] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	check_flood_fill(char **map, t_point size, t_point cordenadas_p)
@@ -147,7 +137,7 @@ int	check_flood_fill(char **map, t_point size, t_point cordenadas_p)
 int	have_char_in_str(char **map)
 {
 	int x;
-	int	y;
+	int y;
 
 	y = -1;
 	while (map[++y] != NULL)

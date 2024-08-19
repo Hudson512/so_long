@@ -6,13 +6,13 @@
 #    By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/19 03:47:22 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/19 06:11:43 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 CC = cc
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 Libft_DIR = ./libft
 Libft_A = $(Libft_DIR)/libft.a
