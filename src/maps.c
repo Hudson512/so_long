@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/16 14:35:17 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/19 04:35:46 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_map_innit(t_info_file **file)
 	temp->collectibles = 0;
 	temp->bytesRead = 0;
 	temp->arr = NULL;
+	temp->arr_backup = NULL;
 }
 
 void	print_file_map(t_info_file **file)
@@ -50,26 +51,36 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 	t_info_file	*temp;
 	char		*buffer;
 	int			len;
-	int			i;
+	int			check_fill;
 
 	temp = *file;
-	len = temp->rows * temp->cols;
+	len = (temp->rows * temp->cols);
 	if (!state)
 		return (0);
 	if (ft_check_fd(temp->fd = open(file_path, O_RDONLY)) == 0)
 		return (0);
-	if ((buffer = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+	if ((buffer = (char *)ft_calloc((len + 1), sizeof(char))) == NULL)
 		return (0);
-	buffer[len + 1] = '\0';
-	if ((temp->bytesRead = read(temp->fd, buffer, len + 1)) == -1)
+	if ((temp->bytesRead = read(temp->fd, buffer, len)) == -1)
+	{
+		free(buffer);
 		return (0);
-	if ((temp->arr = ft_split(buffer, '\n')) == NULL)
+	}
+	if ((temp->arr = ft_split(buffer, 10)) == NULL)
+	{
+		free(buffer);
 		return (0);
-	if ((temp->arr_backup = ft_split(buffer, '\n')) == NULL)
+	}
+	if ((temp->arr_backup = ft_split(buffer, 10)) == NULL)
+	{
+		free(buffer);
+		free(temp->arr);
 		return (0);
-	int g = check_flood_fill(temp->arr,((t_point){temp->rows, temp->cols}), get_char_position('P', temp->arr));
-	printf("g = %d\n", g);
-	return (check_border_array(temp->arr_backup, temp->rows, temp->cols) && g);
+	}
+	free(buffer);
+	check_fill = check_flood_fill(temp->arr,((t_point){temp->rows, temp->cols}), get_char_position('P', temp->arr));
+	close(temp->fd);
+	return (check_border_array(temp->arr_backup, temp->rows, temp->cols) && check_fill);
 }
 
 t_point	get_char_position(char ch, char **map)

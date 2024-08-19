@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/16 14:13:27 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/19 03:47:22 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	main.c \
 		$(SRCS_DIR)/checkers.c\
 		$(SRCS_DIR)/error.c\
 		$(SRCS_DIR)/flood_fill.c\
+		$(SRCS_DIR)/free_memory.c\
 		$(SRCS_DIR)/maps.c\
 		$(SRCS_DIR)/get_next_line/get_next_line.c\
 		$(SRCS_DIR)/get_next_line/get_next_line_utils.c

@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/16 14:22:36 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/19 02:37:57 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_map_innit(t_info_file **file);
 void	print_file_error(void);
 void	print_array_map(char **arr);
 void	print_file_map(t_info_file **file);
+void    free_struct(t_info_file **file);
 t_point	get_char_position(char ch, char **map);
 
 #endif

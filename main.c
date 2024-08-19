@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:47:53 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/15 09:58:59 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/19 04:41:12 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 		else
 			printf("Error: <file_name>.ber\n");
 	}
-	free(file);
+	free_struct(&file);
 	free(mlx);
 	return (0);
 }
