@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:47:53 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/20 13:50:13 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:12:27 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ int	main(int ac, char **av)
 					ft_check_file_dimensions(&file)))
 			{
 				mlx->mlx = mlx_init();
-				printf("c = %d\n r = %d\n", file->cols, file->rows);
 				mlx->mlx_win = mlx_new_window(mlx->mlx, (file->cols - 1) * 50, file->rows * 50,
 						"so_long");
 				mlx->img_bloco = mlx_xpm_file_to_image(mlx->mlx, "./img/will_50.xpm", &mlx->img_widt, &mlx->img_heig);
 				mlx->img_estrada = mlx_xpm_file_to_image(mlx->mlx, "./img/estrada_50.xpm", &mlx->img_widt, &mlx->img_heig);
+				mlx->img_saida = mlx_xpm_file_to_image(mlx->mlx, "./img/E.xpm", &mlx->img_widt, &mlx->img_heig);
+				mlx->img_colecionaveis = mlx_xpm_file_to_image(mlx->mlx, "./img/C.xpm", &mlx->img_widt, &mlx->img_heig);
+				mlx->img_c_b = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm", &mlx->img_widt, &mlx->img_heig);
 				//mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 
 				int x = -1, y = -1;
@@ -50,6 +52,12 @@ int	main(int ac, char **av)
 							mlx->img = mlx->img_estrada;
 						else if (file->arr_backup[i][j] == '1')
 							mlx->img = mlx->img_bloco;
+						else if (file->arr_backup[i][j] == 'E')
+							mlx->img = mlx->img_saida;
+						else if (file->arr_backup[i][j] == 'C')
+							mlx->img = mlx->img_colecionaveis;
+						else if (file->arr_backup[i][j] == 'P')
+							mlx->img = mlx->img_c_b;
 						mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, y, x);
 					}
 				}

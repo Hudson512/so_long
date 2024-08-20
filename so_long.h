@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/20 13:48:03 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:30:01 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef struct s_mlx
 	void	*mlx_win;
 	void	*img_bloco;
 	void	*img_estrada;
+	void	*img_saida;
+	void	*img_colecionaveis;
+	void	*img_c_b;
+	void	*img_c_d;
+	void	*img_c_e;
+	void	*img_c_c;
 	int		img_widt;
 	int		img_heig;
 }			t_info_mlx;
