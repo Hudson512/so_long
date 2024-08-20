@@ -12,7 +12,7 @@
 
 NAME = so_long
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g
+#FLAGS = -Wall -Wextra -Werror -g
 
 Libft_DIR = ./libft
 Libft_A = $(Libft_DIR)/libft.a

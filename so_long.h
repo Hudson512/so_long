@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/19 07:48:45 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:48:03 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ typedef struct s_temp
 typedef struct s_mlx
 {
 	void	*mlx;
-	void	*mlx_win;
 	void	*img;
+	void	*mlx_win;
+	void	*img_bloco;
+	void	*img_estrada;
 	int		img_widt;
 	int		img_heig;
 }			t_info_mlx;
