@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:31:47 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/19 08:49:31 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/20 03:19:35 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	is_square(t_info_file **file)
 	t_info_file	*temp;
 
 	temp = *file;
-	printf("r = %d, c = %d\n", temp->rows, (temp->cols - 1));
 	if (temp->rows > (temp->cols - 1) || temp->rows < (temp->cols - 1))
 		return (valid_characters(file));
 	else
