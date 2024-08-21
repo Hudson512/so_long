@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/20 18:30:01 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:12:28 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "mlx_linux/mlx.h"
 # include "src/get_next_line/get_next_line.h"
+# include "src/ft_printf/ft_printf.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -40,6 +41,8 @@ typedef struct s_temp
 {
 	int		x;
 	int		y;
+	int		i;
+	int		j;
 }			t_point;
 
 typedef struct s_mlx
@@ -59,6 +62,13 @@ typedef struct s_mlx
 	int		img_heig;
 }			t_info_mlx;
 
+typedef struct s_concat
+{
+	t_info_file	**file;
+	t_info_mlx	**mlx;
+}			t_database;
+
+int			key_hook(int keycode, t_info_file **param);
 int			ft_check_file_extesion(const char *str, const char *suffix);
 int			check_border_array(char **arr, int rows, int cols);
 int			ft_check_file_dimensions(t_info_file **file);
@@ -70,6 +80,7 @@ int			valid_characters(t_info_file **file);
 int			print_map_error(char *str, t_info_file **file);
 int			ft_check_fd(int fd);
 int			is_valid_char(char c);
+void		screen(t_info_mlx **temp, t_info_file **temp2);
 void		fill(char **map, t_point size, t_point cur, char *to_fill);
 void		fill_exit(char **map, t_point size, t_point cur, char to_fill);
 void		flood_fill(char **tab, t_point size, t_point begin);

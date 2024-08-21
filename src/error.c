@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:32:44 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/19 08:30:16 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/21 09:36:20 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		print_map_error(char *str, t_info_file **file)
 		free(str);
 	str = NULL;
 	close(temp->fd);
-	write(2, "Error\n", 6);
-	write(2, "Check the map\n", 14);
+	temp->bytesRead = write(2, "Error\n", 6);
+	temp->bytesRead = write(2, "Check the map\n", 14);
 	return (0);
 }

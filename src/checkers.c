@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:31:47 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/20 03:19:35 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/21 08:21:46 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	is_valid_char(char c)
 int	is_square(t_info_file **file)
 {
 	t_info_file	*temp;
-
+	
 	temp = *file;
 	if (temp->rows > (temp->cols - 1) || temp->rows < (temp->cols - 1))
 		return (valid_characters(file));

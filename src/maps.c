@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+        */
+/*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/19 08:44:55 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/21 09:53:39 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ void	print_file_map(t_info_file **file)
 	t_info_file	*temp;
 
 	temp = *file;
-	printf("##### Dados do ficheiro #####\n");
-	printf("FD: %d\n", temp->fd);
-	printf("Rows: %d\n", temp->rows);
-	printf("Cols: %d\n", temp->cols);
-	printf("P: %d\n", temp->character);
-	printf("E: %d\n", temp->exit);
-	printf("C: %d\n", temp->collectibles);
+	ft_printf("##### Dados do ficheiro #####\n");
+	ft_printf("FD: %d\n", temp->fd);
+	ft_printf("Rows: %d\n", temp->rows);
+	ft_printf("Cols: %d\n", temp->cols);
+	ft_printf("P: %d\n", temp->character);
+	ft_printf("E: %d\n", temp->exit);
+	ft_printf("C: %d\n", temp->collectibles);
 	print_array_map(temp->arr);
-	printf("#############################\n");
+	ft_printf("#############################\n");
 	print_array_map(temp->arr_backup);
-	printf("#############################\n");
+	ft_printf("#############################\n");
 }
 
 int	get_map_arr(char *file_path, t_info_file **file, int state)
@@ -59,7 +59,7 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 		return (0);
 	if (ft_check_fd(temp->fd = open(file_path, O_RDONLY)) == 0)
 		return (0);
-	if ((temp->read_line = (char *)ft_calloc((len + 1), sizeof(char))) == NULL)
+	if ((temp->read_line = (char *)ft_calloc((len), sizeof(char))) == NULL)
 		return ((print_map_error(temp->read_line, file)) == 1);
 	if ((temp->bytesRead = read(temp->fd, temp->read_line, len)) == -1)
 		return ((print_map_error(temp->read_line, file)) == 1);
@@ -67,9 +67,12 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 		return ((print_map_error(temp->read_line, file)) == 1);
 	if ((temp->arr_backup = ft_split(temp->read_line, 10)) == NULL)
 		return ((print_map_error(temp->read_line, file)) == 1);
-	check_fill = check_flood_fill(temp->arr, ((t_point){temp->rows,
-				temp->cols}), get_char_position('P', temp->arr));
-	free(temp->read_line);
+	check_fill = check_flood_fill(temp->arr, ((t_point){temp->cols,
+				temp->rows}), get_char_position('P', temp->arr));
+	if (!check_fill)
+		print_map_error(temp->read_line, file);
+	else
+		free(temp->read_line);
 	return (check_border_array(temp->arr_backup, temp->rows, temp->cols)
 		&& check_fill && (close(temp->fd) == 0));
 }
@@ -98,11 +101,11 @@ void	print_array_map(char **arr)
 
 	i = -1;
 	if (!arr)
-		printf("The array is empty or null.\n");
+		ft_printf("The array is empty or null.\n");
 	else
 	{
 		while (arr[++i] != NULL)
-			printf("%s\n", arr[i]);
+			ft_printf("%s\n", arr[i]);
 	}
 }
 

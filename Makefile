@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmateque <hmateque@student.42luanda.com    +#+  +:+       +#+         #
+#    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/19 06:11:43 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/21 12:33:57 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,48 +14,58 @@ NAME = so_long
 CC = cc
 #FLAGS = -Wall -Wextra -Werror -g
 
-Libft_DIR = ./libft
-Libft_A = $(Libft_DIR)/libft.a
-Libix_DIR = ./mlx_linux
-Libix_A = $(Libix_DIR)/libmlx.a
 SRCS_DIR = ./src
 
+Libft_DIR = ./libft
+Libft_A = $(Libft_DIR)/libft.a
+
+Libix_DIR = ./mlx_linux
+Libix_A = $(Libix_DIR)/libmlx.a
+
+PRINT_DIR =	$(SRCS_DIR)/ft_printf
+PRINT_A =	$(PRINT_DIR)/libftprintf.a
+
 SRCS =	main.c \
+		$(SRCS_DIR)/rendering.c\
 		$(SRCS_DIR)/checkers.c\
 		$(SRCS_DIR)/error.c\
 		$(SRCS_DIR)/flood_fill.c\
 		$(SRCS_DIR)/free_memory.c\
 		$(SRCS_DIR)/maps.c\
 		$(SRCS_DIR)/get_next_line/get_next_line.c\
-		$(SRCS_DIR)/get_next_line/get_next_line_utils.c
-
+		$(SRCS_DIR)/get_next_line/get_next_line_utils.c\
 
 OBJ_SRC = $(SRCS:.c=.o)
-OBJ_GET_NEXT_LINE = $(GET_NEXT_LINE:.c=.o)
+OBJ_PRINTF = $(SRCS_PRINT:.c=.o)
 RM = rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ_SRC) $(Libix_A) $(Libft_A)
-	$(CC) $(FLAGS) $(OBJ_SRC) $(Libft_A) $(OBJ_GET_NEXT_LINE) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJ_SRC) $(PRINT_A) $(Libix_A) $(Libft_A)
+	@$(CC) $(FLAGS) $(OBJ_SRC) $(Libft_A) $(PRINT_A) $(OBJ_GET_NEXT_LINE) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(Libix_A):
-	$(MAKE) -C $(Libix_DIR)
+	@$(MAKE) -C $(Libix_DIR)
 
 $(Libft_A):
-	$(MAKE) -C $(Libft_DIR)
+	@$(MAKE) -C $(Libft_DIR)
+
+$(PRINT_A):
+	@$(MAKE) -C $(PRINT_DIR)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
 	$(RM) $(OBJ_SRC)
+	$(MAKE) clean -C $(Libft_DIR)
 	$(MAKE) clean -C $(Libix_DIR)
-	$(MAKE) clean -C $(Libix_DIR)
+	$(MAKE) clean -C $(PRINT_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C $(Libft_DIR)
+	$(MAKE) fclean -C $(PRINT_DIR)
 
 re: fclean all
 
