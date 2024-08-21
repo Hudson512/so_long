@@ -6,21 +6,17 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 10:32:18 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/21 12:53:35 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:48:19 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	screen(t_info_mlx **temp, t_info_file **temp2)
+void	screen(t_info_mlx *mlx, t_info_file *file)
 {
 	t_point var;
-	t_info_mlx *mlx;
-	t_info_file *file;
 
 	var.i = -1;
-	mlx = *temp;
-	file = *temp2;
 	mlx->img_bloco = mlx_xpm_file_to_image(mlx->mlx, "./img/will_50.xpm", &mlx->img_widt, &mlx->img_heig);
 	mlx->img_estrada = mlx_xpm_file_to_image(mlx->mlx, "./img/estrada_50.xpm", &mlx->img_widt, &mlx->img_heig);
 	mlx->img_saida = mlx_xpm_file_to_image(mlx->mlx, "./img/E.xpm", &mlx->img_widt, &mlx->img_heig);
@@ -47,26 +43,29 @@ void	screen(t_info_mlx **temp, t_info_file **temp2)
 		}
 	}
 }
-void	move_w(char **arr, t_point pos)
+void	move_w(t_point pos, t_info_mlx *mlx, t_info_file *file)
 {
-	ft_printf("%d - %d -> %c\n", pos.x, pos.y, arr[pos.y - 1][pos.x]);
-	if (arr[--(pos.y)][pos.x] != '1')
+	ft_printf("%d - %d -> %c\n", pos.x, pos.y, file->arr[pos.y - 1][pos.x]);
+	if (file->arr[--(pos.y)][pos.x] != '1')
 	{
-		arr[pos.y][pos.x] = '0';
-		arr[--(pos.y)][pos.x] = 'P';
+		file->arr[pos.y][pos.x] = '0';
+		file->arr[--(pos.y)][pos.x] = 'P';
 	}
+	screen(mlx, file);
 }
 
-int	key_hook(int keycode, t_info_file **param)
+int	key_hook(int keycode, t_database *db)
 {
-	t_info_file *temp;
+	t_info_file *file;
+	t_info_mlx	*mlx;
 
-	temp = *param;
+	file = db->file;
+	mlx = db->mlx;
 	
-	print_array_map(temp->arr_backup);
-	ft_printf("----------------------------\n");
+	print_array_map(file->arr_backup);
+	ft_printf("-----------------------------------\n");
 	if (keycode == 119)
-		move_w(temp->arr_backup ,get_char_position('P', temp->arr_backup));
+		move_w(get_char_position('P', file->arr_backup), mlx, file);
 	// else if (keycode == 97)
 	// 	move_a(temp->arr_backup ,get_char_position('P', temp->arr_backup));
 	// else if (keycode == 115)

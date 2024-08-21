@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/21 13:12:28 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:49:25 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct s_mlx
 
 typedef struct s_concat
 {
-	t_info_file	**file;
-	t_info_mlx	**mlx;
+	t_info_file	*file;
+	t_info_mlx	*mlx;
 }			t_database;
 
-int			key_hook(int keycode, t_info_file **param);
+int			key_hook(int keycode, t_database *db);
 int			ft_check_file_extesion(const char *str, const char *suffix);
 int			check_border_array(char **arr, int rows, int cols);
 int			ft_check_file_dimensions(t_info_file **file);
@@ -80,7 +80,7 @@ int			valid_characters(t_info_file **file);
 int			print_map_error(char *str, t_info_file **file);
 int			ft_check_fd(int fd);
 int			is_valid_char(char c);
-void		screen(t_info_mlx **temp, t_info_file **temp2);
+void		screen(t_info_mlx *mlx, t_info_file *file);
 void		fill(char **map, t_point size, t_point cur, char *to_fill);
 void		fill_exit(char **map, t_point size, t_point cur, char to_fill);
 void		flood_fill(char **tab, t_point size, t_point begin);
