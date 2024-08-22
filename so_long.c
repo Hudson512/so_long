@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:47:53 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 13:56:59 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:54:27 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 			mlx->mlx = mlx_init();
 			mlx->mlx_win = mlx_new_window(mlx->mlx, (file->cols - 1) * 50,
 					file->rows * 50, "so_long");
-			file->bytesRead = 0;
+			file->bytes_read = 0;
 			screen(mlx, file, 0);
 			mlx_key_hook(mlx->mlx_win, key_hook, db);
 			mlx_loop(mlx->mlx);

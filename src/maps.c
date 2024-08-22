@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 13:26:53 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:31:01 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_map_innit(t_info_file **file)
 	temp->character = 0;
 	temp->exit = 0;
 	temp->collectibles = 0;
-	temp->bytesRead = 0;
+	temp->bytes_read = 0;
 	temp->arr = NULL;
 	temp->arr_backup = NULL;
 	temp->read_line = NULL;
@@ -51,30 +51,30 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 {
 	t_info_file	*temp;
 	int			len;
-	int			check_fill;
 
 	temp = *file;
 	len = (temp->rows * temp->cols);
 	if (!state)
 		return (0);
-	if (ft_check_fd(temp->fd = open(file_path, O_RDONLY)) == 0)
+	temp->fd = open(file_path, O_RDONLY);
+	if (ft_check_fd(temp->fd) == 0)
 		return (0);
-	if ((temp->read_line = (char *)ft_calloc((len), sizeof(char))) == NULL)
+	temp->read_line = (char *)ft_calloc((len), sizeof(char));
+	if (temp->read_line == NULL)
 		return ((print_map_error(temp->read_line, file)) == 1);
-	if ((temp->bytesRead = read(temp->fd, temp->read_line, len)) == -1)
+	temp->bytes_read = read(temp->fd, temp->read_line, len);
+	temp->arr = ft_split(temp->read_line, 10);
+	if (temp->arr == NULL)
 		return ((print_map_error(temp->read_line, file)) == 1);
-	if ((temp->arr = ft_split(temp->read_line, 10)) == NULL)
-		return ((print_map_error(temp->read_line, file)) == 1);
-	if ((temp->arr_backup = ft_split(temp->read_line, 10)) == NULL)
-		return ((print_map_error(temp->read_line, file)) == 1);
-	check_fill = check_flood_fill(temp->arr, ((t_point){temp->cols,
+	temp->arr_backup = ft_split(temp->read_line, 10);
+	temp->bytes_read = check_flood_fill(temp->arr, ((t_point){temp->cols,
 				temp->rows}), get_char_position('P', temp->arr));
-	if (!check_fill)
+	if (!temp->bytes_read)
 		print_map_error(temp->read_line, file);
 	else
 		free(temp->read_line);
 	return (check_border_array(temp->arr_backup, temp->rows, temp->cols)
-		&& check_fill && (close(temp->fd) == 0));
+		&& temp->bytes_read && (close(temp->fd) == 0));
 }
 
 t_point	get_char_position(char ch, char **map)
@@ -107,64 +107,4 @@ void	print_array_map(char **arr)
 		while (arr[++i] != NULL)
 			ft_printf("%s\n", arr[i]);
 	}
-}
-
-int	check_border_array(char **arr, int rows, int cols)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (j < (cols - 1))
-	{
-		if (arr[0][j] != '1' || arr[rows - 1][j] != '1')
-			return (0);
-		j++;
-	}
-	while (i < rows)
-	{
-		if (arr[i][0] != '1' || arr[i][cols - 2] != '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_flood_fill(char **map, t_point size, t_point cordenadas_p)
-{
-	flood_fill(map, size, cordenadas_p);
-	return (have_char_in_str(map));
-}
-
-int	have_char_in_str(char **map)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (map[++y] != NULL)
-	{
-		x = -1;
-		while (map[y][++x])
-			if (map[y][x] == 'E' || map[y][x] == 'C' || map[y][x] == 'P')
-				return (0);
-	}
-	return (1);
-}
-
-int	have_char_in_map(char **map)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (map[++y] != NULL)
-	{
-		x = -1;
-		while (map[y][++x])
-			if (map[y][x] == 'C')
-				return (0);
-	}
-	return (1);
 }

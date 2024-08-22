@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 14:02:01 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:16:08 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_file
 	char		**arr;
 	char		**arr_backup;
 	char		*read_line;
-	int			bytesRead;
+	int			bytes_read;
 }				t_info_file;
 
 typedef struct s_temp
@@ -88,6 +88,12 @@ void			print_file_error(void);
 void			print_array_map(char **arr);
 void			print_file_map(t_info_file **file);
 void			free_struct(t_info_file *file);
+void			change_img(t_info_mlx *mlx, int react);
+void			finished(t_info_mlx *mlx, t_info_file *file, t_database *db);
+void			move_w(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
+void			move_s(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
+void			move_a(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
+void			move_d(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
 t_point			get_char_position(char ch, char **map);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/21 12:33:57 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/22 16:35:58 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,16 @@ Libix_A = $(Libix_DIR)/libmlx.a
 PRINT_DIR =	$(SRCS_DIR)/ft_printf
 PRINT_A =	$(PRINT_DIR)/libftprintf.a
 
-SRCS =	main.c \
+SRCS =	so_long.c \
 		$(SRCS_DIR)/rendering.c\
+		$(SRCS_DIR)/rendering_aux.c\
 		$(SRCS_DIR)/checkers.c\
+		$(SRCS_DIR)/checkers_aux.c\
 		$(SRCS_DIR)/error.c\
 		$(SRCS_DIR)/flood_fill.c\
 		$(SRCS_DIR)/free_memory.c\
 		$(SRCS_DIR)/maps.c\
+		$(SRCS_DIR)/maps_aux.c\
 		$(SRCS_DIR)/get_next_line/get_next_line.c\
 		$(SRCS_DIR)/get_next_line/get_next_line_utils.c\
 
