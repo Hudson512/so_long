@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/21 16:49:25 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:02:01 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "src/get_next_line/get_next_line.h"
 # include "src/ft_printf/ft_printf.h"
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -54,10 +53,7 @@ typedef struct s_mlx
 	void	*img_estrada;
 	void	*img_saida;
 	void	*img_colecionaveis;
-	void	*img_c_b;
-	void	*img_c_d;
-	void	*img_c_e;
-	void	*img_c_c;
+	void	*img_carro;
 	int		img_widt;
 	int		img_heig;
 }			t_info_mlx;
@@ -75,12 +71,13 @@ int			ft_check_file_dimensions(t_info_file **file);
 int			get_map_arr(char *file_path, t_info_file **file, int state);
 int			check_flood_fill(char **map, t_point size, t_point cordenadas_p);
 int			have_char_in_str(char **map);
+int			have_char_in_map(char **map);
 int			is_square(t_info_file **file);
 int			valid_characters(t_info_file **file);
 int			print_map_error(char *str, t_info_file **file);
 int			ft_check_fd(int fd);
 int			is_valid_char(char c);
-void		screen(t_info_mlx *mlx, t_info_file *file);
+void		screen(t_info_mlx *mlx, t_info_file *file, int react);
 void		fill(char **map, t_point size, t_point cur, char *to_fill);
 void		fill_exit(char **map, t_point size, t_point cur, char to_fill);
 void		flood_fill(char **tab, t_point size, t_point begin);
@@ -89,7 +86,7 @@ void		ft_map_innit(t_info_file **file);
 void		print_file_error(void);
 void		print_array_map(char **arr);
 void		print_file_map(t_info_file **file);
-void		free_struct(t_info_file **file);
+void		free_struct(t_info_file *file);
 t_point		get_char_position(char ch, char **map);
 
 #endif

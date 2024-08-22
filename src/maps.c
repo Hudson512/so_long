@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/21 09:53:39 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:26:53 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,21 @@ int	have_char_in_str(char **map)
 		x = -1;
 		while (map[y][++x])
 			if (map[y][x] == 'E' || map[y][x] == 'C' || map[y][x] == 'P')
+				return (0);
+	}
+	return (1);
+}
+int	have_char_in_map(char **map)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (map[++y] != NULL)
+	{
+		x = -1;
+		while (map[y][++x])
+			if (map[y][x] ==  'C')
 				return (0);
 	}
 	return (1);

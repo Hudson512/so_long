@@ -6,22 +6,40 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 10:32:18 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/21 16:48:19 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:00:22 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	screen(t_info_mlx *mlx, t_info_file *file)
+void	change_img(t_info_mlx *mlx, int react)
+{
+	mlx_destroy_image(mlx->mlx, mlx->img_carro);
+	if (react == 1)
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TC.xpm", &mlx->img_widt, &mlx->img_heig);
+	else if (react == 2)
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TE.xpm", &mlx->img_widt, &mlx->img_heig);
+	else if (react == 3)
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm", &mlx->img_widt, &mlx->img_heig);
+	else if (react == 4)
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TD.xpm", &mlx->img_widt, &mlx->img_heig);
+}
+
+void	screen(t_info_mlx *mlx, t_info_file *file, int react)
 {
 	t_point var;
 
 	var.i = -1;
-	mlx->img_bloco = mlx_xpm_file_to_image(mlx->mlx, "./img/will_50.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_estrada = mlx_xpm_file_to_image(mlx->mlx, "./img/estrada_50.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_saida = mlx_xpm_file_to_image(mlx->mlx, "./img/E.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_colecionaveis = mlx_xpm_file_to_image(mlx->mlx, "./img/C.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_c_b = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm", &mlx->img_widt, &mlx->img_heig);
+	if (react != 0)
+		change_img(mlx, react);
+	else
+	{
+		mlx->img_bloco = mlx_xpm_file_to_image(mlx->mlx, "./img/will_50.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_estrada = mlx_xpm_file_to_image(mlx->mlx, "./img/estrada_50.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_saida = mlx_xpm_file_to_image(mlx->mlx, "./img/E.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_colecionaveis = mlx_xpm_file_to_image(mlx->mlx, "./img/C.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm", &mlx->img_widt, &mlx->img_heig);
+	}
 	while (file->arr_backup[++(var.i)])
 	{
 		var.j = -1;
@@ -38,20 +56,84 @@ void	screen(t_info_mlx *mlx, t_info_file *file)
 			else if (file->arr_backup[var.i][var.j] == 'C')
 				mlx->img = mlx->img_colecionaveis;
 			else if (file->arr_backup[var.i][var.j] == 'P')
-				mlx->img = mlx->img_c_b;
+				mlx->img = mlx->img_carro;
 			mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, var.y, var.x);
 		}
 	}
 }
-void	move_w(t_point pos, t_info_mlx *mlx, t_info_file *file)
+
+void	finished(t_info_mlx *mlx, t_info_file *file, t_database *db)
 {
-	ft_printf("%d - %d -> %c\n", pos.x, pos.y, file->arr[pos.y - 1][pos.x]);
-	if (file->arr[--(pos.y)][pos.x] != '1')
+	mlx_destroy_image(mlx->mlx, mlx->img_bloco);
+	mlx_destroy_image(mlx->mlx, mlx->img_estrada);
+	mlx_destroy_image(mlx->mlx, mlx->img_saida);
+	mlx_destroy_image(mlx->mlx, mlx->img_colecionaveis);
+	mlx_destroy_image(mlx->mlx, mlx->img_carro);
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_display(mlx->mlx);
+	free_struct(file);
+	free(mlx->mlx);
+	free(mlx);
+	free(db);
+	exit(0);
+}
+
+void	move_w(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db)
+{
+
+	if (file->arr_backup[pos.y - 1][pos.x] == 'C' || file->arr_backup[pos.y - 1][pos.x]  == '0')
 	{
-		file->arr[pos.y][pos.x] = '0';
-		file->arr[--(pos.y)][pos.x] = 'P';
+		file->arr_backup[pos.y][pos.x] = '0';
+		file->arr_backup[pos.y - 1][pos.x] = 'P';
+		file->bytesRead++;
+		ft_printf("Nº Moves: %d\n", file->bytesRead);
+		screen(mlx, file, 1);
 	}
-	screen(mlx, file);
+	else if (file->arr_backup[pos.y - 1][pos.x] == 'E' && have_char_in_map(file->arr_backup))
+		finished(mlx, file, db);
+}
+
+void	move_s(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db)
+{
+	if (file->arr_backup[pos.y + 1][pos.x] == 'C' || file->arr_backup[pos.y + 1][pos.x] == '0')
+	{
+		file->arr_backup[pos.y][pos.x] = '0';
+		file->arr_backup[pos.y + 1][pos.x] = 'P';
+		file->bytesRead++;
+		ft_printf("Nº Moves: %d\n", file->bytesRead);
+		screen(mlx, file, 3);
+	}
+	else if (file->arr_backup[pos.y + 1][pos.x] == 'E' && have_char_in_map(file->arr_backup))
+		finished(mlx, file, db);
+
+}
+
+void	move_a(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db)
+{
+	if (file->arr_backup[pos.y][pos.x - 1] == 'C' || file->arr_backup[pos.y][pos.x - 1] == '0')
+	{
+		file->arr_backup[pos.y][pos.x] = '0';
+		file->arr_backup[pos.y][pos.x - 1] = 'P';
+		file->bytesRead++;
+		ft_printf("Nº Moves: %d\n", file->bytesRead);
+		screen(mlx, file, 2);
+	}
+	else if (file->arr_backup[pos.y][pos.x - 1] == 'E' && have_char_in_map(file->arr_backup))
+		finished(mlx, file, db);
+}
+
+void	move_d(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db)
+{
+	if (file->arr_backup[pos.y][pos.x + 1] == 'C' || file->arr_backup[pos.y][pos.x + 1] == '0')
+	{
+		file->arr_backup[pos.y][pos.x] = '0';
+		file->arr_backup[pos.y][pos.x + 1] = 'P';
+		file->bytesRead++;
+		ft_printf("Nº Moves: %d\n", file->bytesRead);
+		screen(mlx, file, 4);
+	}
+	else if (file->arr_backup[pos.y][pos.x + 1] == 'E' && have_char_in_map(file->arr_backup))
+		finished(mlx, file, db);
 }
 
 int	key_hook(int keycode, t_database *db)
@@ -61,16 +143,15 @@ int	key_hook(int keycode, t_database *db)
 
 	file = db->file;
 	mlx = db->mlx;
-	
-	print_array_map(file->arr_backup);
-	ft_printf("-----------------------------------\n");
 	if (keycode == 119)
-		move_w(get_char_position('P', file->arr_backup), mlx, file);
-	// else if (keycode == 97)
-	// 	move_a(temp->arr_backup ,get_char_position('P', temp->arr_backup));
-	// else if (keycode == 115)
-	// 	move_s(temp->arr_backup ,get_char_position('P', temp->arr_backup));
-	// else if (keycode == 100)
-	// 	move_d(temp->arr_backup ,get_char_position('P', temp->arr_backup));
+		move_w(get_char_position('P', file->arr_backup), mlx, file, db);
+	else if (keycode == 97)
+		move_a(get_char_position('P', file->arr_backup), mlx, file, db);
+	else if (keycode == 115)
+		move_s(get_char_position('P', file->arr_backup), mlx, file, db);
+	else if (keycode == 100)
+		move_d(get_char_position('P', file->arr_backup), mlx, file, db);
+	else if (keycode == 65307)
+		finished(mlx, file, db);
 	return (0);
 }
