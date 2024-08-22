@@ -17,7 +17,7 @@ void	print_file_error(void)
 	perror("Error opening the file");
 }
 
-int		print_map_error(char *str, t_info_file **file)
+int	print_map_error(char *str, t_info_file **file)
 {
 	t_info_file *temp;
 

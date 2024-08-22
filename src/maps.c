@@ -139,8 +139,8 @@ int	check_flood_fill(char **map, t_point size, t_point cordenadas_p)
 
 int	have_char_in_str(char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (map[++y] != NULL)
@@ -152,6 +152,7 @@ int	have_char_in_str(char **map)
 	}
 	return (1);
 }
+
 int	have_char_in_map(char **map)
 {
 	int x;
@@ -162,7 +163,7 @@ int	have_char_in_map(char **map)
 	{
 		x = -1;
 		while (map[y][++x])
-			if (map[y][x] ==  'C')
+			if (map[y][x] == 'C')
 				return (0);
 	}
 	return (1);

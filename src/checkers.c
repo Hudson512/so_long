@@ -70,6 +70,7 @@ int	ft_check_file_dimensions(t_info_file **file)
 		return (1);
 	return ((print_map_error(temp->read_line, file)) == 1);
 }
+
 int	is_valid_char(char c)
 {
 	if ((c != '\0' && c != '\n') && (c == '1' || c == '0' || c == 'P'
@@ -78,10 +79,11 @@ int	is_valid_char(char c)
 	else
 		return (0);
 }
+
 int	is_square(t_info_file **file)
 {
 	t_info_file	*temp;
-	
+
 	temp = *file;
 	if (temp->rows > (temp->cols - 1) || temp->rows < (temp->cols - 1))
 		return (valid_characters(file));
@@ -91,7 +93,7 @@ int	is_square(t_info_file **file)
 
 int	valid_characters(t_info_file **file)
 {
-	t_info_file *temp;
+	t_info_file	*temp;
 
 	temp = *file;
 	if (temp->character == 1 && temp->exit == 1 && temp->collectibles > 0)

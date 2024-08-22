@@ -14,7 +14,7 @@
 
 void	free_struct(t_info_file *file)
 {
-	int			i;
+	int	i;
 
 	if (file == NULL)
 		return ;

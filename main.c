@@ -14,8 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	t_info_mlx *mlx;
-	t_info_file *file;
+	t_info_mlx	*mlx;
+	t_info_file	*file;
 	t_database	*db;
 
 	if (ac == 2 && ft_check_file_extesion(av[1], ".ber"))
@@ -28,11 +28,11 @@ int	main(int ac, char **av)
 		ft_map_innit(&file);
 		file->fd = open(av[1], O_RDONLY);
 		if (ft_check_fd(file->fd) && get_map_arr(av[1], &file,
-			ft_check_file_dimensions(&file)))
+				ft_check_file_dimensions(&file)))
 		{
 			mlx->mlx = mlx_init();
-			mlx->mlx_win = mlx_new_window(mlx->mlx, (file->cols - 1) * 50, file->rows * 50,
-				"so_long");
+			mlx->mlx_win = mlx_new_window(mlx->mlx, (file->cols - 1) * 50,
+					file->rows * 50, "so_long");
 			file->bytesRead = 0;
 			screen(mlx, file, 0);
 			mlx_key_hook(mlx->mlx_win, key_hook, db);
@@ -44,6 +44,5 @@ int	main(int ac, char **av)
 	}
 	else
 		ft_printf("Error: >./so_long <file_name>.ber\n");
-	
 	return (0);
 }
