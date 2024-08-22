@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:32:44 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 16:11:33 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:41:47 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	print_file_error(void)
 {
-	perror("Error opening the file");
+	int	temp;
+	
+	temp = write(1, "Error\n", 6);
+	(void)temp;
 }
 
 int	print_map_error(char *str, t_info_file **file)
@@ -26,7 +29,5 @@ int	print_map_error(char *str, t_info_file **file)
 		free(str);
 	str = NULL;
 	close(temp->fd);
-	temp->bytes_read = write(2, "Error\n", 6);
-	temp->bytes_read = write(2, "Check the map\n", 14);
 	return (0);
 }

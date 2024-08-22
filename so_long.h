@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 16:16:08 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:47:16 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,15 @@ typedef struct s_temp
 {
 	int			x;
 	int			y;
+}				t_point;
+
+typedef struct s_temp_1
+{
+	int			x;
+	int			y;
 	int			i;
 	int			j;
-}				t_point;
+}				t_point_1;
 
 typedef struct s_mlx
 {

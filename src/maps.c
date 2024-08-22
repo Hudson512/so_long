@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 16:31:01 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:38:57 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 		return ((print_map_error(temp->read_line, file)) == 1);
 	temp->bytes_read = read(temp->fd, temp->read_line, len);
 	temp->arr = ft_split(temp->read_line, 10);
-	if (temp->arr == NULL)
+	if (temp->arr == NULL || !check_border_array(temp->arr, temp->rows, temp->cols))
 		return ((print_map_error(temp->read_line, file)) == 1);
 	temp->arr_backup = ft_split(temp->read_line, 10);
 	temp->bytes_read = check_flood_fill(temp->arr, ((t_point){temp->cols,
@@ -73,8 +73,7 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 		print_map_error(temp->read_line, file);
 	else
 		free(temp->read_line);
-	return (check_border_array(temp->arr_backup, temp->rows, temp->cols)
-		&& temp->bytes_read && (close(temp->fd) == 0));
+	return (temp->bytes_read && (close(temp->fd) == 0));
 }
 
 t_point	get_char_position(char ch, char **map)

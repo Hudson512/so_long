@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 10:32:18 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 16:19:19 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:48:27 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	change_img(t_info_mlx *mlx, int react)
 
 void	screen(t_info_mlx *mlx, t_info_file *file, int react)
 {
-	t_point	var;
+	t_point_1	var;
 
 	var.i = -1;
 	if (react != 0)

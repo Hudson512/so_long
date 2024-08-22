@@ -6,13 +6,13 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/22 16:35:58 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/22 17:40:01 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 CC = cc
-#FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g
 
 SRCS_DIR = ./src
 

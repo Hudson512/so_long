@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:47:53 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 15:54:27 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:38:40 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	main(int ac, char **av)
 			mlx_key_hook(mlx->mlx_win, key_hook, db);
 			mlx_loop(mlx->mlx);
 		}
+		else
+			file->bytes_read = write(1, "Error\n", 6);
 		free_struct(file);
 		free(db);
 		free(mlx);
