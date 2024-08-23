@@ -44,8 +44,8 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 	temp->read_line = (char *)ft_calloc((len + 1), sizeof(char));
 	temp->bytes_read = read(temp->fd, temp->read_line, len);
 	temp->arr = ft_split(temp->read_line, 10);
-	if (temp->arr == NULL
-		|| !check_border_array(temp->arr, temp->rows, temp->cols))
+	if (temp->arr == NULL || !check_border_array(temp->arr, temp->rows,
+			temp->cols))
 		return ((print_map_error(temp->read_line, file)) == 1);
 	temp->arr_backup = ft_split(temp->read_line, 10);
 	temp->bytes_read = check_flood_fill(temp->arr, ((t_point){temp->cols,

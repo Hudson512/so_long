@@ -16,7 +16,7 @@ int	check_one(t_info_file *file, char *str)
 {
 	file->fd = open(str, O_RDONLY);
 	if (ft_check_fd(file->fd) && get_map_arr(str, &file,
-		ft_check_file_dimensions(&file)))
+			ft_check_file_dimensions(&file)))
 	{
 		file->bytes_read = 0;
 		return (1);
@@ -24,7 +24,7 @@ int	check_one(t_info_file *file, char *str)
 	return (0);
 }
 
-int	set_db(t_info_mlx *mlx, t_info_file **file_temp, t_database  **db, char *str)
+int	set_db(t_info_mlx *mlx, t_info_file **file_temp, t_database **db, char *str)
 {
 	int			status;
 	t_info_file	*file;
@@ -37,7 +37,7 @@ int	set_db(t_info_mlx *mlx, t_info_file **file_temp, t_database  **db, char *str
 	return (status);
 }
 
-void	free_all(t_info_mlx *mlx, t_info_file *file, t_database  *db)
+void	free_all(t_info_mlx *mlx, t_info_file *file, t_database *db)
 {
 	free_struct(file);
 	free(db);

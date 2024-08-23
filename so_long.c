@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		{
 			mlx->mlx = mlx_init();
 			mlx->mlx_win = mlx_new_window(mlx->mlx, (file->cols - 1) * 50,
-				file->rows * 50, "so_long");
+					file->rows * 50, "so_long");
 			screen(mlx, file, 0);
 			loop_mlx(mlx, db);
 		}

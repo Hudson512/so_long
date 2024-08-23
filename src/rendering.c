@@ -16,22 +16,31 @@ void	change_img(t_info_mlx *mlx, int react)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img_carro);
 	if (react == 1)
-		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TC.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TC.xpm",
+				&mlx->img_widt, &mlx->img_heig);
 	else if (react == 2)
-		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TE.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TE.xpm",
+				&mlx->img_widt, &mlx->img_heig);
 	else if (react == 3)
-		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm",
+				&mlx->img_widt, &mlx->img_heig);
 	else if (react == 4)
-		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TD.xpm", &mlx->img_widt, &mlx->img_heig);
+		mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TD.xpm",
+				&mlx->img_widt, &mlx->img_heig);
 }
 
 void	set_mlx(t_info_mlx *mlx)
 {
-	mlx->img_bloco = mlx_xpm_file_to_image(mlx->mlx, "./img/will_50.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_estrada = mlx_xpm_file_to_image(mlx->mlx, "./img/estrada_50.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_saida = mlx_xpm_file_to_image(mlx->mlx, "./img/E.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_colecionaveis = mlx_xpm_file_to_image(mlx->mlx, "./img/C.xpm", &mlx->img_widt, &mlx->img_heig);
-	mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm", &mlx->img_widt, &mlx->img_heig);
+	mlx->img_bloco = mlx_xpm_file_to_image(mlx->mlx, "./img/will_50.xpm",
+			&mlx->img_widt, &mlx->img_heig);
+	mlx->img_estrada = mlx_xpm_file_to_image(mlx->mlx, "./img/estrada_50.xpm",
+			&mlx->img_widt, &mlx->img_heig);
+	mlx->img_saida = mlx_xpm_file_to_image(mlx->mlx, "./img/E.xpm",
+			&mlx->img_widt, &mlx->img_heig);
+	mlx->img_colecionaveis = mlx_xpm_file_to_image(mlx->mlx, "./img/C.xpm",
+			&mlx->img_widt, &mlx->img_heig);
+	mlx->img_carro = mlx_xpm_file_to_image(mlx->mlx, "./img/TB.xpm",
+			&mlx->img_widt, &mlx->img_heig);
 }
 
 void	rendering_img(t_info_mlx *mlx, t_info_file *file)
