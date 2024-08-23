@@ -6,7 +6,7 @@
 #    By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 15:53:23 by hmateque          #+#    #+#              #
-#    Updated: 2024/08/22 17:40:01 by hmateque         ###   ########.fr        #
+#    Updated: 2024/08/23 11:08:06 by hmateque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ PRINT_DIR =	$(SRCS_DIR)/ft_printf
 PRINT_A =	$(PRINT_DIR)/libftprintf.a
 
 SRCS =	so_long.c \
+		so_long_aux.c \
 		$(SRCS_DIR)/rendering.c\
 		$(SRCS_DIR)/rendering_aux.c\
 		$(SRCS_DIR)/checkers.c\

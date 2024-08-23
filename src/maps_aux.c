@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:22:57 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 17:39:18 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/23 07:43:41 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	have_char_in_str(char **map)
 
 int	have_char_in_map(char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (map[++y] != NULL)

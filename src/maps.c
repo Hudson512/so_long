@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:36:36 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 17:38:57 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/23 08:14:52 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,6 @@ void	ft_map_innit(t_info_file **file)
 	temp->read_line = NULL;
 }
 
-void	print_file_map(t_info_file **file)
-{
-	t_info_file	*temp;
-
-	temp = *file;
-	ft_printf("##### Dados do ficheiro #####\n");
-	ft_printf("FD: %d\n", temp->fd);
-	ft_printf("Rows: %d\n", temp->rows);
-	ft_printf("Cols: %d\n", temp->cols);
-	ft_printf("P: %d\n", temp->character);
-	ft_printf("E: %d\n", temp->exit);
-	ft_printf("C: %d\n", temp->collectibles);
-	print_array_map(temp->arr);
-	ft_printf("#############################\n");
-	print_array_map(temp->arr_backup);
-	ft_printf("#############################\n");
-}
-
 int	get_map_arr(char *file_path, t_info_file **file, int state)
 {
 	t_info_file	*temp;
@@ -59,12 +41,11 @@ int	get_map_arr(char *file_path, t_info_file **file, int state)
 	temp->fd = open(file_path, O_RDONLY);
 	if (ft_check_fd(temp->fd) == 0)
 		return (0);
-	temp->read_line = (char *)ft_calloc((len), sizeof(char));
-	if (temp->read_line == NULL)
-		return ((print_map_error(temp->read_line, file)) == 1);
+	temp->read_line = (char *)ft_calloc((len + 1), sizeof(char));
 	temp->bytes_read = read(temp->fd, temp->read_line, len);
 	temp->arr = ft_split(temp->read_line, 10);
-	if (temp->arr == NULL || !check_border_array(temp->arr, temp->rows, temp->cols))
+	if (temp->arr == NULL
+		|| !check_border_array(temp->arr, temp->rows, temp->cols))
 		return ((print_map_error(temp->read_line, file)) == 1);
 	temp->arr_backup = ft_split(temp->read_line, 10);
 	temp->bytes_read = check_flood_fill(temp->arr, ((t_point){temp->cols,

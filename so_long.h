@@ -6,7 +6,7 @@
 /*   By: hmateque <hmateque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:17:14 by hmateque          #+#    #+#             */
-/*   Updated: 2024/08/22 17:47:16 by hmateque         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:41:11 by hmateque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,27 @@ int				valid_characters(t_info_file **file);
 int				print_map_error(char *str, t_info_file **file);
 int				ft_check_fd(int fd);
 int				is_valid_char(char c);
+int				check_one(t_info_file *file, char *str);
+int				set_db(t_info_mlx *mlx, t_info_file **file_temp, t_database  **db, char *str);
+int				finished(t_database *db);
 void			screen(t_info_mlx *mlx, t_info_file *file, int react);
+void			free_all(t_info_mlx *mlx, t_info_file *file, t_database  *db);
 void			fill(char **map, t_point size, t_point cur, char *to_fill);
 void			fill_exit(char **map, t_point size, t_point cur, char to_fill);
 void			flood_fill(char **tab, t_point size, t_point begin);
 void			check_caracter_file(t_info_file **file, char c);
 void			ft_map_innit(t_info_file **file);
+void			loop_mlx(t_info_mlx *mlx, t_database *db);
 void			print_file_error(void);
 void			print_array_map(char **arr);
-void			print_file_map(t_info_file **file);
 void			free_struct(t_info_file *file);
 void			change_img(t_info_mlx *mlx, int react);
-void			finished(t_info_mlx *mlx, t_info_file *file, t_database *db);
 void			move_w(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
 void			move_s(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
 void			move_a(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
 void			move_d(t_point pos, t_info_mlx *mlx, t_info_file *file, t_database *db);
+void			set_mlx(t_info_mlx *mlx);
+void			rendering_img(t_info_mlx *mlx, t_info_file *file);
 t_point			get_char_position(char ch, char **map);
 
 #endif
